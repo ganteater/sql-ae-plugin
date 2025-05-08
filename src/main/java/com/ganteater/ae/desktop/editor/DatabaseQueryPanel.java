@@ -49,7 +49,7 @@ import com.ganteater.ae.desktop.ui.AEFrame;
 import com.ganteater.ae.desktop.ui.DialogPopupMenu;
 import com.ganteater.ae.processor.LocalDataSource;
 import com.ganteater.ae.processor.SQLQuery;
-import com.ganteater.ae.processor.TaskProcessor;
+import com.ganteater.ae.processor.Processor;
 import com.ganteater.ae.util.xml.easyparser.Node;
 
 public class DatabaseQueryPanel extends JPanel
@@ -92,7 +92,7 @@ public class DatabaseQueryPanel extends JPanel
 		Node taskNode = getManager().getConfigNode();
 		
 		
-		TaskProcessor taskProcessor = taskEditor.getTaskProcessor();
+		Processor taskProcessor = taskEditor.getTaskProcessor();
 		
 		LocalDataSource.createDBConnection(taskNode, taskProcessor);
 		
@@ -686,7 +686,7 @@ public class DatabaseQueryPanel extends JPanel
 		return taskEditor.getManager();
 	}
 
-	public TaskProcessor getTaskProcessor() {
+	public Processor getTaskProcessor() {
 		return taskEditor.getTaskProcessor();
 	}
 

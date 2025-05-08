@@ -23,17 +23,17 @@ import com.ganteater.ae.processor.annotation.CommandHotHepl;
 import com.ganteater.ae.util.AEUtils;
 import com.ganteater.ae.util.xml.easyparser.Node;
 
-public class SQL extends TaskProcessor {
+public class SQL extends BaseProcessor {
 
 	private Map<String, SQLQuery> connectionMap = new HashMap<>();
 	private PLQuery plQuery;
 
-	public SQL(TaskProcessor aParent) {
+	public SQL(Processor aParent) {
 		super(aParent);
 	}
 
 	@Override
-	public void init(TaskProcessor aParent, Node action) throws CommandException {
+	public void init(Processor aParent, Node action) throws CommandException {
 		super.init(aParent, action);
 		Node configNode = getParent().getConfigNode();
 		LocalDataSource.createDBConnection(configNode, this);

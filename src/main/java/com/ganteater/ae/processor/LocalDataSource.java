@@ -127,7 +127,7 @@ public class LocalDataSource implements DataSource {
 		return fProperties.keySet();
 	}
 
-	public static void createDBConnection(Node taskNode, TaskProcessor processor) {
+	public static void createDBConnection(Node taskNode, Processor processor) {
 		if (taskNode != null) {
 			Node[] connections = taskNode.findNodes("Var", "type", "jdbc");
 			for (Node propNodes : connections) {
