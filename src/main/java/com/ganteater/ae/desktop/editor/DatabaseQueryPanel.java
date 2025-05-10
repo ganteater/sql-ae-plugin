@@ -53,7 +53,7 @@ import com.ganteater.ae.processor.Processor;
 import com.ganteater.ae.util.xml.easyparser.Node;
 
 public class DatabaseQueryPanel extends JPanel
-		implements TableModel, Runnable, ActionListener, KeyListener, AeEditPanel {
+		implements Editor, TableModel, Runnable, ActionListener, KeyListener, AeEditPanel {
 
 	private static final String CONNECTION_ATTR_NAME = "connection";
 	private static final long serialVersionUID = 1L;
@@ -62,7 +62,7 @@ public class DatabaseQueryPanel extends JPanel
 
 	static Properties fCallableHelperProperties = new Properties();
 
-	private Editor editor = new Editor();
+	private TextEditor editor = new TextEditor();
 
 	private String panelName;
 	private List<String[]> rowList = new ArrayList<>();
@@ -84,18 +84,18 @@ public class DatabaseQueryPanel extends JPanel
 
 	private transient Thread runThread;
 
-	public DatabaseQueryPanel(TaskEditor taskEditor, Node node) throws CommandException {
+	@Override
+	public void init(TaskEditor taskEditor, Node node) throws CommandException {
 		setLayout(new BorderLayout());
 		this.taskEditor = taskEditor;
 		this.panelName = StringUtils.defaultIfEmpty(node.getAttribute("name"), getClass().getSimpleName());
 
 		Node taskNode = getManager().getConfigNode();
-		
-		
+
 		Processor taskProcessor = taskEditor.getTaskProcessor();
-		
+
 		LocalDataSource.createDBConnection(taskNode, taskProcessor);
-		
+
 		taskProcessor.taskNode(node);
 		LocalDataSource.createDBConnection(node, taskProcessor);
 
@@ -710,7 +710,7 @@ public class DatabaseQueryPanel extends JPanel
 		// NOT IMPLEMENTED
 	}
 
-	public Editor getEditor() {
+	public TextEditor getEditor() {
 		return editor;
 	}
 

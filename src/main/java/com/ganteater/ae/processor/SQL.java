@@ -28,13 +28,8 @@ public class SQL extends BaseProcessor {
 	private Map<String, SQLQuery> connectionMap = new HashMap<>();
 	private PLQuery plQuery;
 
-	public SQL(Processor aParent) {
-		super(aParent);
-	}
-
 	@Override
-	public void init(Processor aParent, Node action) throws CommandException {
-		super.init(aParent, action);
+	public void init() throws CommandException {
 		Node configNode = getParent().getConfigNode();
 		LocalDataSource.createDBConnection(configNode, this);
 	}
@@ -308,7 +303,7 @@ public class SQL extends BaseProcessor {
 	}
 
 	public void runCommandJdbc(final Node aCurrentAction) throws Throwable {
-		createDBConnection(aCurrentAction, fVariables);
+		createDBConnection(aCurrentAction, variables);
 	}
 
 	public void createDBConnection(Node theDS, Map variables) {

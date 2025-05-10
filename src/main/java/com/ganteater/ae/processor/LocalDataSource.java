@@ -143,7 +143,8 @@ public class LocalDataSource implements DataSource {
 							value = node.getText();
 						}
 
-						value = new TemplateProcessor(processor.getVariables(), taskNode, processor.getBaseDir())
+						Map<String, Object> variables = processor.getVariables();
+						value = new TemplateProcessor(variables, taskNode, processor.getBaseDir())
 								.replaceProperties(value);
 						properties.setProperty(key, value);
 					}
