@@ -1,0 +1,8 @@
+<Recipe name="SQL">
+  <Editor name="Database" class="DatabaseQueryPanel" /> 
+  <Extern class="SQL">
+    <Sql connection="postgresql">select * from information_schema.tables</Sql> 
+    <Out name="TABLE_NAME" /> 
+  </Extern> 
+  <Note name="Database" connection="postgresql">select * from information_schema.tables where table_type='BASE TABLE'</Note> 
+</Recipe> 

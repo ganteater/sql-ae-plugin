@@ -1,0 +1,35 @@
+<Environment xmlns="http://ganteater.com/xml/configuration"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://ganteater.com/xml/configuration https://ganteater.com/xml/configuration/anteater-1.2.1.6.xsd">
+
+	<Configuration name="Base Commands">
+		<Var name="log_file" value="ae-desktop" />
+		<Logger rootLogger="DEBUG,LOGFILE,CONSOLE"
+			Threshold="$var{system::log_level,DEBUG}"
+			ConversionPattern="%d{dd.MM.yyyy HH:mm:ss} %-6p %m %n"
+			File="$var{HOME_WORKINGDIR}/logs/$var{log_file}_$var{START_TIME}.log" />
+
+		<Recipes path="https://sourceforge.net/code-snapshots/svn/a/an/anteater/code/anteater-code-r709-trunk-anteater-cli-src-manual-test-ae-recipes-commands.zip" />
+	</Configuration>
+	
+	<Configuration name="Database Commands">
+		<Var name="log_file" value="logfile" />
+		<Logger rootLogger="DEBUG,LOGFILE,CONSOLE"
+			Threshold="$var{system::log_level,DEBUG}"
+			ConversionPattern="%d{dd.MM.yyyy HH:mm:ss} %-6p %m %n"
+			File="$var{HOME_WORKINGDIR}/logs/$var{log_file}_$var{START_TIME}.log" />
+
+		<Recipes path="recipes" />
+		
+		<Var name="postgresql" type="jdbc">
+			<item key="url" value="jdbc:postgresql://localhost:5432/macha"/>
+			<item key="password" value="$var{db password}"/>
+			<item key="username" value="$var{db username}"/>
+			<item key="driver" value="org.postgresql.Driver"/>
+		</Var>
+
+		<Var name="db username" value="macha" />
+		<Var name="db password" type="password" init="console"/>
+	</Configuration>
+
+</Environment>

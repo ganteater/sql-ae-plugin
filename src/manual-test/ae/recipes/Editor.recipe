@@ -1,0 +1,10 @@
+<Recipe name="Editor">
+  <Editor name="Database" class="DatabaseQueryPanel">
+    <Var name="postgresql_2" type="jdbc">
+      <item key="url" value="jdbc:postgresql://localhost:5432/macha" /> 
+      <item key="password" value="macha" /> 
+      <item key="username" value="macha" /> 
+      <item key="driver" value="org.postgresql.Driver" /> 
+    </Var> 
+  </Editor> 
+</Recipe> 
