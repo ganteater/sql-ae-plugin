@@ -7,13 +7,14 @@
 	<parent>
 		<groupId>com.ganteater.plugins</groupId>
 		<artifactId>ae-plugins</artifactId>
-		<version>1.2.1</version>
+		<version>1.2.2-SNAPSHOT</version>
 		<relativePath></relativePath>
 	</parent>
 
 	<artifactId>sql-ae-plugin</artifactId>
 	<name>SQL Anteater Plugin</name>
 	<description>Module provides anteater plugin for SQL.</description>
+	<url>https://github.com/ganteater/sql-ae-plugin</url>
 
 	<dependencies>
 		<dependency>
@@ -40,4 +41,14 @@
 			</build>
 		</profile>
 	</profiles>
+	
+	<scm>
+		<connection>scm:git:https://github.com/ganteater/sql-ae-plugin.git</connection>
+		<developerConnection>scm:git:https://github.com/ganteater/sql-ae-plugin.git</developerConnection>
+		<url>https://github.com/ganteater/sql-ae-plugin</url>
+	</scm>
+	
+	<issueManagement>
+		<url>https://github.com/ganteater/sql-ae-plugin/issues</url>
+	</issueManagement>
 </project>
