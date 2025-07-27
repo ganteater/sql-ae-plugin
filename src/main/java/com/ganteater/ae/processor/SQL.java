@@ -19,7 +19,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.ganteater.ae.CommandException;
 import com.ganteater.ae.processor.annotation.CommandExamples;
-import com.ganteater.ae.processor.annotation.CommandHotHepl;
 import com.ganteater.ae.util.AEUtils;
 import com.ganteater.ae.util.xml.easyparser.Node;
 
@@ -52,7 +51,6 @@ public class SQL extends BaseProcessor {
 	}
 
 	@CommandExamples({ "<Sql connection=''>select a var_name1, b var_name2, ... from ... </Sql>" })
-	@CommandHotHepl("<html>.</html>")
 	public void runCommandSql(final Node aCurrentAction) throws Throwable {
 		final String theText = replaceProperties(aCurrentAction.getInnerText());
 		final String connection = StringUtils.defaultString(aCurrentAction.getAttribute("connection"),
