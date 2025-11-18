@@ -6,6 +6,7 @@ import java.awt.Point;
 import java.awt.PopupMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
@@ -48,12 +49,11 @@ import com.ganteater.ae.CommandException;
 import com.ganteater.ae.desktop.ui.AEFrame;
 import com.ganteater.ae.desktop.ui.DialogPopupMenu;
 import com.ganteater.ae.processor.LocalDataSource;
-import com.ganteater.ae.processor.SQLQuery;
 import com.ganteater.ae.processor.Processor;
+import com.ganteater.ae.processor.SQLQuery;
 import com.ganteater.ae.util.xml.easyparser.Node;
 
-public class DatabaseQueryPanel extends JPanel
-		implements Editor, TableModel, Runnable, ActionListener, KeyListener, AeEditPanel {
+public class DatabaseQueryPanel extends JPanel implements Editor, TableModel, Runnable, ActionListener, KeyListener {
 
 	private static final String CONNECTION_ATTR_NAME = "connection";
 	private static final long serialVersionUID = 1L;
@@ -83,12 +83,13 @@ public class DatabaseQueryPanel extends JPanel
 	private List<Integer> widthList = new ArrayList<>();
 
 	private transient Thread runThread;
+	private Node editorNode;
 
 	@Override
-	public void init(TaskEditor taskEditor, Node node) throws CommandException {
-		setLayout(new BorderLayout());
+	public void init(TaskEditor taskEditor) throws CommandException {
 		this.taskEditor = taskEditor;
-		this.panelName = StringUtils.defaultIfEmpty(node.getAttribute("name"), getClass().getSimpleName());
+		setLayout(new BorderLayout());
+		this.panelName = StringUtils.defaultIfEmpty(editorNode.getAttribute("name"), getClass().getSimpleName());
 
 		Node taskNode = getManager().getConfigNode();
 
@@ -96,21 +97,18 @@ public class DatabaseQueryPanel extends JPanel
 
 		LocalDataSource.createDBConnection(taskNode, taskProcessor);
 
-		taskProcessor.taskNode(node);
-		LocalDataSource.createDBConnection(node, taskProcessor);
+		taskProcessor.taskNode(editorNode);
+		LocalDataSource.createDBConnection(editorNode, taskProcessor);
 
 		splitPane.setTopComponent(new JScrollPane(editor));
 
-		editor.addKeyListener(new CodeHelper(this, taskEditor.getLogger()));
 		editor.addMouseListener(new MouseAdapter() {
-
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (e.getClickCount() == 1 && e.getButton() == MouseEvent.BUTTON3) {
 					showPopupMenu();
 				}
 			}
-
 		});
 
 		popupMenu.add(createMenuItem("select * from"));
@@ -715,13 +713,8 @@ public class DatabaseQueryPanel extends JPanel
 	}
 
 	@Override
-	public void reload() {
-		// NOT IMPLEMENTED
-	}
-
-	@Override
-	public DialogPopupMenu contextHelp(DialogPopupMenu menu) {
-		return null;
+	public void setEditorNode(Node node) {
+		this.editorNode = node;
 	}
 
 }
